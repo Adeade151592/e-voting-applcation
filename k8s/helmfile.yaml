@@ -34,6 +34,7 @@ spec:
   source:
     chart: postgresql
     repoURL: oci://registry-1.docker.io/bitnamicharts
+    targetRevision: 16.7.21
     helm:
       releaseName: postgres
   destination:
