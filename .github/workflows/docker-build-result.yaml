@@ -19,7 +19,7 @@ permissions:
 
 
 jobs:
-    build_image:
+    build_image_ecr:
         runs-on: ubuntu-latest
         steps:
           - name: Checkout code
@@ -33,6 +33,7 @@ jobs:
               aws-region: ${{ secrets.AWS_REGION }}
               role-session-name: github-actions
 
+
           - name: Login to ECR
             uses: docker/login-action@v3
             with:
@@ -45,6 +46,28 @@ jobs:
               file: ./result/Dockerfile
               push: true
               tags: ${{ secrets.AWS_ECR_REGISTRY }}/result:${{ github.sha }}
+
+              
+    build_image_dockerhub:
+        runs-on: ubuntu-latest
+
+        steps:
+          - name: Checkout code
+            uses: actions/checkout@v2
+
+          - name: Login to DockerHub
+            uses: docker/login-action@v3
+            with:
+              username: ${{ secrets.DOCKERHUB_USERNAME }}
+              password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+          - name: Build and push result image to DockerHub
+            uses: docker/build-push-action@v2
+            with:
+              context: ./result
+              file: ./result/Dockerfile
+              push: true
+              tags: ${{ secrets.DOCKERHUB_USERNAME }}/result:${{ github.sha }}
               
              
 

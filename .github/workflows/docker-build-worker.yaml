@@ -1,4 +1,4 @@
-name: Build and push worker image
+name: Build and push worker image to ecr 
 on:
   push:
     branches:
