@@ -47,6 +47,22 @@ jobs:
               push: true
               tags: ${{ secrets.AWS_ECR_REGISTRY }}/result:${{ github.sha }}
 
+          - name: Build and push vote image to ecr
+            uses: docker/build-push-action@v2
+            with:
+              context: ./vote
+              file: ./vote/Dockerfile
+              push: true
+              tags: ${{ secrets.AWS_ECR_REGISTRY }}/vote:${{ github.sha }}
+          
+          - name: Build and push worker image to ecr
+            uses: docker/build-push-action@v2
+            with:
+              context: ./worker
+              file: ./worker/Dockerfile
+              push: true
+              tags: ${{ secrets.AWS_ECR_REGISTRY }}/worker:${{ github.sha }}
+
               
     build_image_dockerhub:
         runs-on: ubuntu-latest
@@ -58,7 +74,7 @@ jobs:
           - name: Login to DockerHub
             uses: docker/login-action@v3
             with:
-              username: ${{ secrets.DOCKERHUB_USERNAME }}
+              username: ${{ secrets.DOCKER_USERNAME }}
               password: ${{ secrets.DOCKERHUB_TOKEN }}
 
           - name: Build and push result image to DockerHub
