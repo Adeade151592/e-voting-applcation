@@ -4,7 +4,7 @@ data:
   POSTGRES_HOST: db
   POSTGRES_PASSWORD: postgres
   POSTGRES_USER: postgres
-  REDIS_HOST: redis
+  REDIS_HOST: redis-master
 kind: ConfigMap
 metadata:
   creationTimestamp: null
