@@ -113,6 +113,10 @@ jobs:
               file: ./worker/Dockerfile
               push: true
               tags: ${{ secrets.AWS_ECR_REGISTRY }}/worker:${{ github.sha }}
+
+
+
+
           
 
        
