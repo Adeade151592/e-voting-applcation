@@ -19,7 +19,7 @@ permissions:
 
 
 jobs:
-    build_image_ecr:
+    build_result_image:
         runs-on: ubuntu-latest
         steps:
           - name: Checkout code
@@ -47,14 +47,7 @@ jobs:
               push: true
               tags: ${{ secrets.AWS_ECR_REGISTRY }}/result:${{ github.sha }}
 
-          - name: Build and push vote image to ecr
-            uses: docker/build-push-action@v2
-            with:
-              context: ./vote
-              file: ./vote/Dockerfile
-              push: true
-              tags: ${{ secrets.AWS_ECR_REGISTRY }}/vote:${{ github.sha }}
-          
+         
           - name: Build and push worker image to ecr
             uses: docker/build-push-action@v2
             with:
@@ -64,26 +57,65 @@ jobs:
               tags: ${{ secrets.AWS_ECR_REGISTRY }}/worker:${{ github.sha }}
 
               
-    build_image_dockerhub:
-        runs-on: ubuntu-latest
-
-        steps:
+    build_vote_image:
+      runs-on: ubuntu-latest
+      steps:
           - name: Checkout code
             uses: actions/checkout@v2
 
-          - name: Login to DockerHub
+
+          - name: configure aws credentials
+            uses: aws-actions/configure-aws-credentials@v4.2.1
+            with:
+              role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.AWS_ROLE_NAME }}
+              aws-region: ${{ secrets.AWS_REGION }}
+              role-session-name: github-actions
+
+
+          - name: Login to ECR
             uses: docker/login-action@v3
             with:
-              username: ${{ secrets.DOCKER_USERNAME }}
-              password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-          - name: Build and push result image to DockerHub
+              registry: ${{ secrets.AWS_ECR_REGISTRY }}
+            
+          - name: Build and push vote image to ecr
             uses: docker/build-push-action@v2
             with:
-              context: ./result
-              file: ./result/Dockerfile
+              context: ./vote
+              file: ./vote/Dockerfile
               push: true
-              tags: ${{ secrets.DOCKERHUB_USERNAME }}/result:${{ github.sha }}
+              tags: ${{ secrets.AWS_ECR_REGISTRY }}/vote:${{ github.sha }}
+
+
+    build_worker_image:
+      runs-on: ubuntu-latest
+      steps:
+          - name: Checkout codex
+            uses: actions/checkout@v2
+
+
+          - name: configure aws credentials
+            uses: aws-actions/configure-aws-credentials@v4.2.1
+            with:
+              role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.AWS_ROLE_NAME }}
+              aws-region: ${{ secrets.AWS_REGION }}
+              role-session-name: github-actions
+
+
+          - name: Login to ECR
+            uses: docker/login-action@v3
+            with:
+              registry: ${{ secrets.AWS_ECR_REGISTRY }}
+            
+          - name: Build and push worker image to ecr
+            uses: docker/build-push-action@v2
+            with:
+              context: ./worker
+              file: ./worker/Dockerfile
+              push: true
+              tags: ${{ secrets.AWS_ECR_REGISTRY }}/worker:${{ github.sha }}
+          
+
+       
               
              
 
