@@ -10,7 +10,6 @@ on:
       - '.github/workflows/docker-build-worker.yaml'
       - 'vote/**'
       - '.github/workflows/docker-build-vote.yaml'
-      - 'k8s/**'
   pull_request:
       branches:
         - main
