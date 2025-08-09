@@ -6,6 +6,11 @@ on:
     paths:
       - 'result/**'
       - '.github/workflows/docker-build-result.yaml'
+      - 'worker/**'
+      - '.github/workflows/docker-build-worker.yaml'
+      - 'vote/**'
+      - '.github/workflows/docker-build-vote.yaml'
+      - 'k8s/**'
   pull_request:
       branches:
         - main
