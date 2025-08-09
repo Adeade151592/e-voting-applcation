@@ -13,7 +13,8 @@ spec:
       releaseName: redis
       values: | 
         architecture: standalone
-        usePassword: false
+        auth:
+          enabled: false
   destination:
     server: "https://kubernetes.default.svc"
     namespace: evoting
