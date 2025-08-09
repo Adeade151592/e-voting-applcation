@@ -20,7 +20,7 @@ spec:
         ports:
         - containerPort: 80
         envFrom:
-        - configMapRef:
+        - secretKeyRef:
             name: app-cm
 
 
@@ -59,7 +59,7 @@ spec:
         ports:
         - containerPort: 80
         envFrom:
-        - configMapRef:
+        - secretKeyRef:
             name: app-cm
 
 ---
@@ -98,7 +98,7 @@ spec:
         ports:
         - containerPort: 80
         envFrom:
-        - configMapRef:
+        - secretKeyRef:
             name: app-cm
 
 ---
@@ -134,5 +134,5 @@ spec:
         ports:
         - containerPort: 80
         envFrom:
-        - configMapRef:
+        - secretKeyRef:
             name: app-cm
