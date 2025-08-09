@@ -1,52 +1,52 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: redis
-  namespace: argocd
-spec:
-  project: default
-  source:
-    chart: redis
-    repoURL: https://charts.bitnami.com/bitnami
-    targetRevision: 17.8.2
-    helm:
-      releaseName: redis
-      values: | 
-        architecture: standalone
-        auth:
-          enabled: false
-  destination:
-    server: "https://kubernetes.default.svc"
-    namespace: evoting
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: redis
+#   namespace: argocd
+# spec:
+#   project: default
+#   source:
+#     chart: redis
+#     repoURL: https://charts.bitnami.com/bitnami
+#     targetRevision: 17.8.2
+#     helm:
+#       releaseName: redis
+#       values: | 
+#         architecture: standalone
+#         auth:
+#           enabled: false
+#   destination:
+#     server: "https://kubernetes.default.svc"
+#     namespace: evoting
+#   syncPolicy:
+#     automated:
+#       prune: true
+#       selfHeal: true
+#     syncOptions:
+#       - CreateNamespace=true
 
 
----
+# ---
 
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: postgres
-  namespace: argocd
-spec:
-  project: default
-  source:
-    chart: postgresql
-    repoURL: https://charts.bitnami.com/bitnami
-    targetRevision: 16.2.1
-    helm:
-      releaseName: postgres
-  destination:
-    server: "https://kubernetes.default.svc"
-    namespace: evoting
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: postgres
+#   namespace: argocd
+# spec:
+#   project: default
+#   source:
+#     chart: postgresql
+#     repoURL: https://charts.bitnami.com/bitnami
+#     targetRevision: 16.2.1
+#     helm:
+#       releaseName: postgres
+#   destination:
+#     server: "https://kubernetes.default.svc"
+#     namespace: evoting
+#   syncPolicy:
+#     automated:
+#       prune: true
+#       selfHeal: true
+#     syncOptions:
+#       - CreateNamespace=true
