@@ -115,3 +115,24 @@ spec:
       targetPort: 80
 
 
+--- 
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: result-app-job
+spec:
+  backoffLimit: 4       # Number of retries before marking as failed
+  template:
+    metadata:
+      labels:
+        app: result-app
+    spec:
+      restartPolicy: OnFailure
+      containers:
+      - name: result-app
+        image: 427613144745.dkr.ecr.us-east-1.amazonaws.com/seed-data:648924fc88446ab600b5b13c95cb7e85a5485ce8
+        ports:
+        - containerPort: 80
+        envFrom:
+        - configMapRef:
+            name: app-cm
