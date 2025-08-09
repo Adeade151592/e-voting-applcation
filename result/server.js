@@ -27,8 +27,13 @@ const database = process.env.POSTGRES_DB || 'postgres';
 
 const connectionString = `postgres://${user}:${password}@${host}/${database}`;
 
-var pool = new Pool({ connectionString });
-
+// var pool = new Pool({ connectionString });
+var pool = new Pool({
+  connectionString,
+  ssl: {
+    rejectUnauthorized: false, // Accept AWS RDS self-signed cert
+  },
+});
 
 async.retry(
   {times: 1000, interval: 1000},
