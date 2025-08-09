@@ -22,7 +22,7 @@ namespace Worker
                 var dbUser = Environment.GetEnvironmentVariable("POSTGRES_USER") ?? "postgres";
                 var dbPass = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD") ?? "postgres";
                 var dbName = Environment.GetEnvironmentVariable("POSTGRES_DB") ?? "vote";
-                var connectionString = $"Server={dbHost};Username={dbUser};Password={dbPass};Database={dbName};Ssl Mode=Require;Trust Server Certificate=true"";
+                var connectionString = $"Server={dbHost};Username={dbUser};Password={dbPass};Database={dbName};Ssl Mode=Require;Trust Server Certificate=true";
                 var pgsql = OpenDbConnection(connectionString);
 
                 var redisHost = Environment.GetEnvironmentVariable("REDIS_HOST") ?? "redis";
