@@ -4,8 +4,7 @@ data:
   POSTGRES_HOST: terraform-20250809075206994500000001.claanowxofed.us-east-1.rds.amazonaws.com
   POSTGRES_PASSWORD: 8pR3a5s3P2f3fu
   POSTGRES_USER: postgres
-  REDIS_HOST: redis-master
+  REDIS_HOST: barilon-project-redis.nwcrwv.0001.use1.cache.amazonaws.com
 kind: ConfigMap
 metadata:
-  creationTimestamp: null
   name: app-cm
