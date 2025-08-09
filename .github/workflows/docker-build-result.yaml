@@ -119,6 +119,33 @@ jobs:
               push: true
               tags: ${{ secrets.AWS_ECR_REGISTRY }}/worker:${{ github.sha }}
 
+    build_seed_image:
+      runs-on: ubuntu-latest
+      steps:
+          - name: Checkout code
+            uses: actions/checkout@v2
+
+          - name: configure aws credentials
+            uses: aws-actions/configure-aws-credentials@v4.2.1
+            with:
+              role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.AWS_ROLE_NAME }}
+              aws-region: ${{ secrets.AWS_REGION }}
+              role-session-name: github-actions
+
+
+          - name: Login to ECR
+            uses: docker/login-action@v3
+            with:
+              registry: ${{ secrets.AWS_ECR_REGISTRY }}
+            
+          - name: Build and push seed image to ecr
+            uses: docker/build-push-action@v2
+            with:
+              context: ./seed-data
+              file: ./seed-data/Dockerfile
+              push: true
+              tags: ${{ secrets.AWS_ECR_REGISTRY }}/seed-data:${{ github.sha }}
+
 
 
 
