@@ -2,6 +2,38 @@
 
 A simple, distributed e-voting application built with microservices architecture using Docker containers. This project demonstrates real-time voting with a web interface and live result updates.
 
+## 🙏 Credits
+
+This project is based on the excellent [Docker Sample Voting App](https://github.com/dockersamples/example-voting-app) by Docker. The original example has been adapted and customized for learning purposes.
+
+Special thanks to the Docker team for providing such a comprehensive example of microservices architecture.
+
+## ☸️ GitOps Deployment
+
+This project supports GitOps deployment using ArgoCD for continuous deployment to Kubernetes.
+
+### Kubernetes Deployment
+
+The application can be deployed to a Kubernetes cluster using the manifests in the `k8s/` folder:
+
+```bash
+kubectl apply -f k8s/deploy.yaml
+```
+
+### ArgoCD Integration
+
+This repository is configured for GitOps workflows where:
+- **ArgoCD** monitors this repository for changes
+- **Kubernetes manifests** are located in the `k8s/` folder
+- **Infrastructure** is managed separately in the [EKS Production Infrastructure](https://github.com/isrealei/eks-production-infra) repository
+
+### Infrastructure
+
+The production Kubernetes infrastructure (EKS cluster) is provisioned and managed through:
+**🔗 [EKS Production Infrastructure Repository](https://github.com/isrealei/eks-production-infra)**
+
+This separation follows GitOps best practices by keeping application manifests and infrastructure code in separate repositories.
+
 ## 🏗️ Architecture
 
 ![E-Voting Application Architecture](evotingapp.drawio_9b6a4da3.gif)
@@ -112,32 +144,6 @@ To run in development mode with live code reloading:
 docker-compose up --build
 ```
 
-## ☸️ GitOps Deployment
-
-This project supports GitOps deployment using ArgoCD for continuous deployment to Kubernetes.
-
-### Kubernetes Deployment
-
-The application can be deployed to a Kubernetes cluster using the manifests in the `k8s/` folder:
-
-```bash
-kubectl apply -f k8s/deploy.yaml
-```
-
-### ArgoCD Integration
-
-This repository is configured for GitOps workflows where:
-- **ArgoCD** monitors this repository for changes
-- **Kubernetes manifests** are located in the `k8s/` folder
-- **Infrastructure** is managed separately in the [EKS Production Infrastructure](https://github.com/isrealei/eks-production-infra) repository
-
-### Infrastructure
-
-The production Kubernetes infrastructure (EKS cluster) is provisioned and managed through:
-**🔗 [EKS Production Infrastructure Repository](https://github.com/isrealei/eks-production-infra)**
-
-This separation follows GitOps best practices by keeping application manifests and infrastructure code in separate repositories.
-
 ## 🐳 Docker Services
 
 | Service | Technology | Port | Purpose |
@@ -207,12 +213,6 @@ npm test
 ## 📝 License
 
 This project is for educational purposes. Feel free to use and modify as needed.
-
-## 🙏 Credits
-
-This project is based on the excellent [Docker Sample Voting App](https://github.com/dockersamples/example-voting-app) by Docker. The original example has been adapted and customized for learning purposes.
-
-Special thanks to the Docker team for providing such a comprehensive example of microservices architecture.
 
 ## 🤝 Contributing
 
