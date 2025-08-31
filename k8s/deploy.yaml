@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: result-app
-        image: 427613144745.dkr.ecr.us-east-1.amazonaws.com/result:a7b5df06ba0c0c3fb195b2cd1afb4ad6bfbac8ca
+        image: 427613144745.dkr.ecr.us-east-1.amazonaws.com/result:d26f9464ffcfe9ad440f0152708ffe8a85b417f8
         ports:
         - containerPort: 80
         envFrom:
@@ -55,7 +55,7 @@ spec:
     spec:
       containers:
       - name: vote-app
-        image: 427613144745.dkr.ecr.us-east-1.amazonaws.com/vote:a7b5df06ba0c0c3fb195b2cd1afb4ad6bfbac8ca
+        image: 427613144745.dkr.ecr.us-east-1.amazonaws.com/vote:d26f9464ffcfe9ad440f0152708ffe8a85b417f8
         ports:
         - containerPort: 80
         envFrom:
