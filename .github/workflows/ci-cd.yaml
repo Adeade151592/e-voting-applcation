@@ -53,11 +53,7 @@ jobs:
           
       - name: Run integration tests
         run: |
-          # Test vote submission
-          curl -X POST -d "vote=a" http://localhost:8082
-          sleep 2
-          # Verify vote was processed
-          docker compose logs worker | grep "Processing vote"
+          bash scripts/integration-tests.sh
           
       - name: Cleanup
         if: always()
