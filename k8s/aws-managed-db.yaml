@@ -1,0 +1,50 @@
+# Configuration for AWS managed services
+# This assumes you have RDS PostgreSQL and ElastiCache Redis already provisioned
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config-aws
+data:
+  # Replace these with your actual AWS service endpoints
+  POSTGRES_HOST: "evoting-db.cluster-xyz.us-east-1.rds.amazonaws.com"
+  POSTGRES_DB: "evoting"
+  POSTGRES_USER: "evoting_user"
+  REDIS_HOST: "evoting-redis.abc123.cache.amazonaws.com"
+  OPTION_A: "Cats"
+  OPTION_B: "Dogs"
+
+---
+# Secret for AWS RDS credentials
+apiVersion: v1
+kind: Secret
+metadata:
+  name: app-cm-aws
+type: Opaque
+data:
+  # Base64 encoded values - replace with your actual credentials
+  POSTGRES_PASSWORD: <BASE64_ENCODED_PASSWORD>
+
+---
+# External service for RDS (if needed for service discovery)
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-external
+spec:
+  type: ExternalName
+  externalName: evoting-db.cluster-xyz.us-east-1.rds.amazonaws.com
+  ports:
+  - port: 5432
+
+---
+# External service for ElastiCache (if needed)
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-external
+spec:
+  type: ExternalName
+  externalName: evoting-redis.abc123.cache.amazonaws.com
+  ports:
+  - port: 6379

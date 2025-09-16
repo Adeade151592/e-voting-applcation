@@ -1,0 +1,42 @@
+# Development overrides for docker-compose.yml
+# This file is automatically loaded by docker compose
+version: "3.8"
+
+services:
+  vote:
+    build:
+      target: dev  # Use development stage
+    volumes:
+      - ./vote:/usr/local/app  # Mount source code for hot reload
+    environment:
+      - FLASK_ENV=development
+      - FLASK_DEBUG=1
+      - OPTION_A=Pizza
+      - OPTION_B=Burger
+    command: ["python", "app.py"]
+    
+  result:
+    volumes:
+      - ./result:/usr/local/app  # Mount source code for hot reload
+    environment:
+      - NODE_ENV=development
+    command: ["nodemon", "server.js"]
+    
+  worker:
+    volumes:
+      - ./worker:/source  # Mount source for development
+    # Note: C# requires rebuild for changes, but volume helps with debugging
+    
+  # Development database with exposed port for direct access
+  db:
+    ports:
+      - "5432:5432"  # Expose PostgreSQL for direct access
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres  
+      - POSTGRES_PASSWORD=postgres
+      
+  # Development Redis with exposed port
+  redis:
+    ports:
+      - "6380:6379"  # Expose Redis for direct access (avoid conflicts)

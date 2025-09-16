@@ -5,6 +5,7 @@ import socket
 import random
 import json
 import logging
+from datetime import datetime
 
 option_a = os.getenv('OPTION_A', "Cats")
 option_b = os.getenv('OPTION_B', "Dogs")
@@ -34,8 +35,9 @@ def hello():
     if request.method == 'POST':
         redis = get_redis()
         vote = request.form['vote']
-        app.logger.info('Received vote for %s', vote)
-        data = json.dumps({'voter_id': voter_id, 'vote': vote})
+        timestamp = datetime.now().strftime('%H:%M:%S')
+        app.logger.info('🗳️  [%s] Vote received for %s from voter %s', timestamp, vote, voter_id[:8])
+        data = json.dumps({'voter_id': voter_id, 'vote': vote, 'timestamp': timestamp})
         redis.rpush('votes', data)
 
     resp = make_response(render_template(

@@ -11,9 +11,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   </head>
   <body>
+    <!-- Development Mode Banner -->
+    <div style="background: #ff6b35; color: white; text-align: center; padding: 10px; font-weight: bold;">
+      🚀 DEVELOPMENT MODE - Hot Reloading Active!
+    </div>
     <div id="content-container">
       <div id="content-container-center">
-        <h3>{{option_a}} vs {{option_b}}!</h3>
+        <h3>🍕 {{option_a}} vs {{option_b}} 🍔</h3>
+        <p style="color: #666; font-style: italic;">Choose your favorite food in this epic battle!</p>
         <form id="choice" name='form' method="POST" action="/">
           <button id="a" type="submit" name="vote" class="a" value="a">{{option_a}}</button>
           <button id="b" type="submit" name="vote" class="b" value="b">{{option_b}}</button>
