@@ -43,11 +43,21 @@ jobs:
       - name: Start test environment
         run: |
           cp .env.development .env
-          docker compose up -d --wait
+          docker compose up -d --wait --timeout 60
+          sleep 15
           
       - name: Run health checks
         run: |
-          sleep 10
+          # Wait for services to be ready
+          for i in {1..30}; do
+            if curl -f http://localhost:8082 >/dev/null 2>&1; then
+              echo "Vote app is ready"
+              break
+            fi
+            echo "Waiting for vote app... ($i/30)"
+            sleep 2
+          done
+          
           curl -f http://localhost:8082 || exit 1
           curl -f http://localhost:8083 || exit 1
           
