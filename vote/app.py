@@ -6,7 +6,7 @@ import random
 import json
 import logging
 from datetime import datetime
-# Security scanning test - AWS credentials configured
+# Security scanning test - trigger all builds
 
 option_a = os.getenv('OPTION_A', "Cats")
 option_b = os.getenv('OPTION_B', "Dogs")
