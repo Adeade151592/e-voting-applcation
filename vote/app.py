@@ -6,6 +6,7 @@ import random
 import json
 import logging
 from datetime import datetime
+# Security scanning test
 
 option_a = os.getenv('OPTION_A', "Cats")
 option_b = os.getenv('OPTION_B', "Dogs")
