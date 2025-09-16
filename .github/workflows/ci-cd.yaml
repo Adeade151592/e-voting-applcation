@@ -112,8 +112,6 @@ jobs:
           tags: |
             ${{ env.ECR_REGISTRY }}/vote:${{ github.sha }}
             ${{ env.ECR_REGISTRY }}/vote:latest
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
 
   # Build Result Service  
   build-result:
@@ -144,8 +142,6 @@ jobs:
           tags: |
             ${{ env.ECR_REGISTRY }}/result:${{ github.sha }}
             ${{ env.ECR_REGISTRY }}/result:latest
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
 
   # Build Worker Service
   build-worker:
@@ -176,8 +172,6 @@ jobs:
           tags: |
             ${{ env.ECR_REGISTRY }}/worker:${{ github.sha }}
             ${{ env.ECR_REGISTRY }}/worker:latest
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
 
   # Update K8s Manifests (GitOps)
   update-manifests:
