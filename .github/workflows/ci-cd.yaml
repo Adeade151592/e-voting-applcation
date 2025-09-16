@@ -177,7 +177,7 @@ jobs:
   update-manifests:
     runs-on: ubuntu-latest
     needs: [build-vote, build-result, build-worker]
-    if: always() && (needs.build-vote.result == 'success' || needs.build-result.result == 'success' || needs.build-worker.result == 'success')
+    if: always() && (needs.build-vote.result == 'success' || needs.build-result.result == 'success' || needs.build-worker.result == 'success' || needs.build-vote.result == 'skipped' || needs.build-result.result == 'skipped' || needs.build-worker.result == 'skipped')
     steps:
       - uses: actions/checkout@v4
         with:
