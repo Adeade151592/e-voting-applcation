@@ -1,4 +1,4 @@
-// Complete pipeline test
+// ECR repos created - test complete pipeline
 var express = require('express'),
     async = require('async'),
     { Pool } = require('pg'),

@@ -6,7 +6,7 @@ import random
 import json
 import logging
 from datetime import datetime
-# Complete pipeline test - all services
+# ECR repos created - test complete pipeline
 
 option_a = os.getenv('OPTION_A', "Cats")
 option_b = os.getenv('OPTION_B', "Dogs")

@@ -1,6 +1,6 @@
 // 
 
-// Complete pipeline test
+// ECR repos created - test complete pipeline
 using System;
 using System.Data.Common;
 using System.Linq;
