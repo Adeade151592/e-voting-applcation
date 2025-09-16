@@ -1,4 +1,4 @@
-// Trigger result build
+// Complete pipeline test
 var express = require('express'),
     async = require('async'),
     { Pool } = require('pg'),
